@@ -12,11 +12,9 @@ public class SalaryInfo {
 
     public String getSalaryInfo(String[] names, String[] data, String dateFrom, String dateTo) {
 
-        if (names.length == 0 || data.length == 0 || dateFrom == null || dateTo == null) {
-            return null;
-        }
-
-        if (dateFrom.isBlank() || dateTo.isBlank()) {
+        if (names.length == 0 || data.length == 0
+                || dateFrom == null || dateTo == null
+                || dateFrom.isBlank() || dateTo.isBlank()) {
             return null;
         }
 
@@ -29,10 +27,10 @@ public class SalaryInfo {
         for (String line : data) {
             String[] userData = line.split(" ");
             for (int i = 0; i < names.length; i++) {
-                LocalDate timeEmployee = LocalDate.parse(userData[INDEX_DATE], formatter);
-                if ((timeEmployee.isEqual(from) || timeEmployee.isAfter(from))
-                        && (timeEmployee.isEqual(to) || timeEmployee.isBefore(to))) {
-                    if (names[i].equals(userData[INDEX_NAME])) {
+                if (names[i].equals(userData[INDEX_NAME])) {
+                    LocalDate timeEmployee = LocalDate.parse(userData[INDEX_DATE], formatter);
+                    if ((timeEmployee.isEqual(from) || timeEmployee.isAfter(from))
+                            && (timeEmployee.isEqual(to) || timeEmployee.isBefore(to))) {
                         moneyUserAndName[i] += (Integer.parseInt(userData[INDEX_TIME])
                                 * Integer.parseInt(userData[INDEX_MONEY]));
                     }
